@@ -1,0 +1,91 @@
+# "average deck" from EDHREC
+1 Tovolar, Dire Overlord
+
+1 Afflicted Deserter
+1 Avabruck Caretaker
+1 Breakneck Rider
+1 Cemetery Prowler
+1 Child of the Pack
+1 Cult of the Waxing Moon
+1 Daybreak Ranger
+1 Duskwatch Recruiter
+1 Geier Reach Bandit
+1 Hermit of the Natterknolls
+1 Hollowhenge Overlord
+1 Hound Tamer
+1 Howlpack Piper
+1 Huntmaster of the Fells
+1 Ill-Tempered Loner
+1 Immerwolf
+1 Instigator Gang
+1 Kessig Naturalist
+1 Kruin Outlaw
+1 Mayor of Avabruck
+1 Mondronen Shaman
+1 Nightpack Ambusher
+1 Outland Liberator
+1 Reckless Stormseeker
+1 Sage of Ancient Lore
+1 Scorned Villager
+1 Silverfur Partisan
+1 Tovolar's Huntmaster
+1 Ulrich of the Krallenhorde
+1 Village Watch
+1 Volatile Arsonist
+1 Weaver of Blossoms
+1 Werewolf Pack Leader
+
+1 Beast Within
+1 Chaos Warp
+1 Heroic Intervention
+1 Moonlight Hunt
+1 Moonmist
+1 Return of the Wildspeaker
+1 Waxing Moon
+
+1 Bala Ged Recovery
+1 Blasphemous Act
+1 Cultivate
+1 Kodama's Reach
+1 Rampant Growth
+1 Relentless Assault
+1 Three Visits
+1 Triumph of the Hordes
+1 Unnatural Moonrise
+
+1 Arcane Signet
+1 Gruul Signet
+1 Herald's Horn
+1 Lightning Greaves
+1 Sol Ring
+1 Swiftfoot Boots
+1 The Celestus
+
+1 Beastmaster Ascension
+1 Berserkers' Onslaught
+1 Full Moon's Rise
+1 Howling Moon
+1 Howlpack Resurgence
+1 Ranger Class
+1 Rhythm of the Wild
+1 Unnatural Growth
+
+1 Arlinn Kord
+1 Arlinn, the Pack's Hope
+
+1 Boseiju, Who Endures
+1 Cinder Glade
+1 Command Tower
+1 Cragcrown Pathway
+1 Game Trail
+1 Kessig Wolf Run
+1 Path of Ancestry
+1 Reliquary Tower
+1 Rockfall Vale
+1 Rootbound Crag
+1 Secluded Courtyard
+1 Stomping Ground
+1 Temple of Abandon
+
+4 Mountain
+16 Forest
