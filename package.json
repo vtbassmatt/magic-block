@@ -1,6 +1,6 @@
 {
-  "name": "custom-block-template",
-  "version": "0.0.0",
+  "name": "magic-block",
+  "version": "0.0.1",
   "watch": {
     "build-blocks": {
       "patterns": [
