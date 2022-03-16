@@ -58,10 +58,13 @@ const Comment = ({ value }: { value: string }) => {
 };
 
 const Card = ({ cardname, count }: { cardname: string; count: number }) => {
+  const scryfallLink = `https://scryfall.com/search?q=!%22${cardname}%22`;
   return (
     <li className="card mb-1">
       <span className="cardcount">{count > 1 ? count + "x " : ""}</span>
-      {cardname}
+      <a href={scryfallLink} target="_blank">
+        {cardname}
+      </a>
     </li>
   );
 };
