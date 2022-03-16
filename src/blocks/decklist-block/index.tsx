@@ -1,4 +1,5 @@
 import { FileBlockProps } from "@githubnext/utils";
+import { getCardNamed } from "scryfall-client";
 import "./index.css";
 
 export default function (props: FileBlockProps) {
@@ -11,15 +12,6 @@ export default function (props: FileBlockProps) {
         <h3 className="Box-title">Decklist: {context.path}</h3>
       </div>
       <div className="Box-body">
-        Metadata example: this button has been clicked{" "}
-        <button
-          className="btn"
-          onClick={() =>
-            onUpdateMetadata({ number: (metadata.number || 0) + 1 })
-          }
-        >
-          {metadata.number || 0} times
-        </button>
         <ul className="color-bg-default">
           {Object.values(listEntries).map((line, index) => {
             return <ListItem key={index} value={line} />;
@@ -64,7 +56,20 @@ const Card = ({ cardname, count }: { cardname: string; count: number }) => {
       <span className="cardcount">{count > 1 ? count + "x " : ""}</span>
       <a href={scryfallLink} target="_blank">
         {cardname}
-      </a>
+      </a>{" "}
+      <button className="btn btn-sm" onClick={() => scryfallTest(cardname)}>
+        Scryfall test
+      </button>
     </li>
   );
 };
+
+function scryfallTest(cardname: string) {
+  getCardNamed(cardname)
+    .then(function (card) {
+      alert(card.type_line);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+}
