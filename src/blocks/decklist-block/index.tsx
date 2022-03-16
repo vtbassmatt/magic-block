@@ -20,9 +20,9 @@ export default function (props: FileBlockProps) {
         >
           {metadata.number || 0} times
         </button>
-        <ul>
+        <ul className="color-bg-default">
           {Object.values(listEntries).map((line, index) => {
-            return <Noncard key={index} value={line} />;
+            return <ListItem key={index} value={line} />;
           })}
         </ul>
       </div>
@@ -30,10 +30,38 @@ export default function (props: FileBlockProps) {
   );
 }
 
-const Noncard = ({ value }: { value: string }) => {
+const ListItem = ({ value }: { value: string }) => {
+  const isComment = value.startsWith("#") || value.startsWith("//");
+  if (isComment) {
+    return <Comment value={value} />;
+  }
+  const hasCount = /(\d+) (.*)/i;
+  const data = value.match(hasCount);
+  if (data) {
+    const count = data[1];
+    const name = data[2];
+    return <Card cardname={name} count={parseInt(count)} />;
+  }
+  return <Uncertain value={value} />;
+};
+
+const Uncertain = ({ value }: { value: string }) => {
+  return <li className="uncertain mb-1">{value || "\u00a0"}</li>;
+};
+
+const Comment = ({ value }: { value: string }) => {
   return (
-    <li className="zebra">
-      <pre>{value || " "}</pre>
+    <li className="comment mb-1">
+      <pre>{value}</pre>
+    </li>
+  );
+};
+
+const Card = ({ cardname, count }: { cardname: string; count: number }) => {
+  return (
+    <li className="card mb-1">
+      <span className="cardcount">{count > 1 ? count + "x " : ""}</span>
+      {cardname}
     </li>
   );
 };

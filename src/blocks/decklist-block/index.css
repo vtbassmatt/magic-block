@@ -1,6 +1,13 @@
-.zebra {
-  background: papayawhip;
+/* TODO: figure out how to actually use Primer CSS here */
+.comment {
+  color: #666;
 }
-.zebra:nth-child(2n) {
-  background: skyblue;
+.card {
+  color: #5a5;
+}
+.cardcount {
+  color: #555;
+}
+.uncertain {
+  color: #000;
 }
