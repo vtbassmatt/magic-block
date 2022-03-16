@@ -1,0 +1,6 @@
+.zebra {
+  background: papayawhip;
+}
+.zebra:nth-child(2n) {
+  background: skyblue;
+}

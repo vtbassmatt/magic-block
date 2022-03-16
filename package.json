@@ -24,6 +24,20 @@
   "blocks": [
     {
       "type": "file",
+      "id": "decklist-block",
+      "title": "Decklist Block",
+      "description": "Render a decklist",
+      "entry": "/src/blocks/decklist-block/index.tsx",
+      "extensions": [
+        "txt",
+        "md",
+        "dec",
+        "deck"
+      ],
+      "example_path": "https://github.com/vtbassmatt/decklist/blob/main/edhrec.txt"
+    },
+    {
+      "type": "file",
       "id": "file-block",
       "title": "Example File Block",
       "description": "A basic file block",
