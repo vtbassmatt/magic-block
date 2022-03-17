@@ -1,5 +1,5 @@
 import { FileBlockProps } from "@githubnext/utils";
-import { getCardNamed } from "scryfall-client";
+import { cardLookup } from "./cardData";
 import "./index.css";
 
 export default function (props: FileBlockProps) {
@@ -65,7 +65,8 @@ const Card = ({ cardname, count }: { cardname: string; count: number }) => {
 };
 
 function scryfallTest(cardname: string) {
-  getCardNamed(cardname)
+  cardLookup
+    .getCard(cardname)
     .then(function (card) {
       alert(card.type_line);
     })
