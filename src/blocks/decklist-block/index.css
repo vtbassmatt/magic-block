@@ -2,8 +2,14 @@
 .comment {
   color: #666;
 }
-.card {
+.card-success {
   color: #5a5;
+}
+.card-failure {
+  color: #a55;
+}
+.card-pending {
+  color: #55a;
 }
 .cardcount {
   color: #555;

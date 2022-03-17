@@ -52,15 +52,21 @@ const Comment = ({ value }: { value: string }) => {
 
 const Card = ({ cardname, count }: { cardname: string; count: number }) => {
   const [typeline, setTypeline] = useState("(loading...)");
-  const scryfallLink = `https://scryfall.com/search?q=!%22${cardname}%22`;
+  const [scryfallLink, setScryfallLink] = useState(
+    `https://scryfall.com/search?q=!%22${cardname}%22`
+  );
+  const [successClassName, setSuccessClassName] = useState("card-pending");
 
   cardLookup
     .getCard(cardname)
     .then(function (card) {
       if (card instanceof CardNotFound) {
         setTypeline("[card not found]");
+        setSuccessClassName("card-failure");
       } else {
         setTypeline("[" + card.card_faces[0].type_line + "]");
+        setScryfallLink(card.scryfall_uri);
+        setSuccessClassName("card-success");
       }
     })
     .catch(function (err) {
@@ -70,7 +76,7 @@ const Card = ({ cardname, count }: { cardname: string; count: number }) => {
   return (
     <li className="mb-1">
       <span className="cardcount">{count > 1 ? count + "x " : ""}</span>
-      <a href={scryfallLink} target="_blank" className="card">
+      <a href={scryfallLink} target="_blank" className={successClassName}>
         {cardname}
       </a>{" "}
       <span>{typeline}</span>
