@@ -34,7 +34,7 @@
         "dec",
         "deck"
       ],
-      "example_path": "https://github.com/vtbassmatt/decklist/blob/main/edhrec.txt"
+      "example_path": "https://github.com/vtbassmatt/magic-block/blob/main/examples/edhrec.txt"
     },
     {
       "type": "file",

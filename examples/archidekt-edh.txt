@@ -1,4 +1,4 @@
-# EDH deck exported from Archidekt
+# EDH deck exported from Archidekt -- DOES NOT WORK YET
 1x Akroma's Will (cmr) [Plan,Instant] 
 1x Ancient Brontodon (mb1) [Maybeboard{noDeck}{noPrice}] 
 1x Apex Altisaur (c19) [Mass,Creature] 
