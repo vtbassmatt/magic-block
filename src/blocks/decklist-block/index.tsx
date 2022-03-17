@@ -1,5 +1,6 @@
 import { FileBlockProps } from "@githubnext/utils";
-import { cardLookup } from "./cardData";
+import { useState } from "react";
+import { cardLookup, CardNotFound } from "./cardData";
 import "./index.css";
 
 export default function (props: FileBlockProps) {
@@ -50,27 +51,29 @@ const Comment = ({ value }: { value: string }) => {
 };
 
 const Card = ({ cardname, count }: { cardname: string; count: number }) => {
+  const [typeline, setTypeline] = useState("(loading...)");
   const scryfallLink = `https://scryfall.com/search?q=!%22${cardname}%22`;
-  return (
-    <li className="card mb-1">
-      <span className="cardcount">{count > 1 ? count + "x " : ""}</span>
-      <a href={scryfallLink} target="_blank">
-        {cardname}
-      </a>{" "}
-      <button className="btn btn-sm" onClick={() => scryfallTest(cardname)}>
-        Scryfall test
-      </button>
-    </li>
-  );
-};
 
-function scryfallTest(cardname: string) {
   cardLookup
     .getCard(cardname)
     .then(function (card) {
-      alert(card.type_line);
+      if (card instanceof CardNotFound) {
+        setTypeline("[card not found]");
+      } else {
+        setTypeline("[" + card.card_faces[0].type_line + "]");
+      }
     })
     .catch(function (err) {
       console.log(err);
     });
-}
+
+  return (
+    <li className="mb-1">
+      <span className="cardcount">{count > 1 ? count + "x " : ""}</span>
+      <a href={scryfallLink} target="_blank" className="card">
+        {cardname}
+      </a>{" "}
+      <span>{typeline}</span>
+    </li>
+  );
+};

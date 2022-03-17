@@ -1,18 +1,20 @@
 import Card from "scryfall-client/dist/models/card";
 import { getCardNamed } from "scryfall-client";
 
+export class CardNotFound {}
+type MaybeCard = Card | CardNotFound;
+
 interface CardMap {
-  [index: string]: Card | false;
+  [index: string]: MaybeCard;
 }
 
 class CardDB {
   private cards: CardMap = {};
 
-  async getCard(cardname: string): Promise<Card> {
+  async getCard(cardname: string): Promise<MaybeCard> {
     if (cardname in this.cards) {
-      const maybeCardData = this.cards[cardname];
-      if (maybeCardData) return Promise.resolve(maybeCardData);
-      return Promise.reject("card was not found");
+      const cachedCardData = this.cards[cardname];
+      return Promise.resolve(cachedCardData);
     }
 
     let self = this;
@@ -22,11 +24,14 @@ class CardDB {
         return card;
       })
       .catch(function (err) {
-        self.cards[cardname] = false;
         if (err?.originalError?.status == 404) {
-          return Promise.reject("card not found on Scryfall");
+          // cache 404s
+          self.cards[cardname] = new CardNotFound();
+          return Promise.resolve(self.cards[cardname]);
+        } else {
+          // don't cache non-404s, it could be transient
+          return Promise.resolve(new CardNotFound());
         }
-        throw err;
       });
   }
 }
