@@ -1,6 +1,6 @@
 {
-  "name": "custom-block-template",
-  "version": "0.0.0",
+  "name": "magic-block",
+  "version": "0.0.1",
   "watch": {
     "build-blocks": {
       "patterns": [
@@ -22,6 +22,20 @@
     "prepare": "husky install"
   },
   "blocks": [
+    {
+      "type": "file",
+      "id": "decklist-block",
+      "title": "Decklist Block",
+      "description": "Render a decklist",
+      "entry": "/src/blocks/decklist-block/index.tsx",
+      "extensions": [
+        "txt",
+        "md",
+        "dec",
+        "deck"
+      ],
+      "example_path": "https://github.com/vtbassmatt/decklist/blob/main/edhrec.txt"
+    },
     {
       "type": "file",
       "id": "file-block",
@@ -57,7 +71,8 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-error-boundary": "^3.1.4",
-    "react-query": "^3.32.3"
+    "react-query": "^3.32.3",
+    "scryfall-client": "^0.20.0"
   },
   "devDependencies": {
     "@types/git-url-parse": "^9.0.1",

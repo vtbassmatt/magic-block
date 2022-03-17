@@ -1,0 +1,181 @@
+# EDH deck exported from Archidekt
+1x Akroma's Will (cmr) [Plan,Instant] 
+1x Ancient Brontodon (mb1) [Maybeboard{noDeck}{noPrice}] 
+1x Apex Altisaur (c19) [Mass,Creature] 
+1x Arcane Signet (c21) [Rock/Dork,Artifact] 
+1x Atla Palani, Nest Tender (c19) *F*  [Plan,Creature] 
+1x Atzocan Seer (rix) [Rock/Dork,Creature] 
+1x Austere Command (cmr) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Battlefield Forge (ori)
+1x Beast Within (sld) [Pinpoint,Instant] 
+1x Belligerent Brontodon (xln) [Maybeboard{noDeck}{noPrice}] 
+1x Bellowing Aegisaur (xln) [Plan,Creature] 
+1x Blasphemous Act (sld) [Mass] 
+1x Blossoming Sands (c19)
+1x Boros Charm (c21) [Plan,Instant] 
+1x Boros Garrison (c19) [Maybe-mana{noDeck}{noPrice}] 
+1x Boros Guildgate (c19) [Maybe-mana{noDeck}{noPrice}] 
+1x Boros Signet (c17) [Maybe-mana{noDeck}{noPrice}] 
+1x Branchloft Pathway // Boulderloft Pathway (znr)
+1x Burning Sun's Avatar (xln) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Canopy Vista (c20)
+1x Carnage Tyrant (xln) [Plan,Creature] 
+1x Chaos Warp (c19) [Maybeboard{noDeck}{noPrice}] 
+1x Charging Monstrosaur (xln) [Plan] 
+1x Charging Tuskodon (rix) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Chromatic Lantern (grn) [Maybe-mana{noDeck}{noPrice}] 
+1x Cinder Glade (c19)
+1x Clifftop Retreat (isd)
+1x Colossal Majesty (c19) [Draw,Enchantment] 
+1x Command Tower (c17)
+1x Commander's Sphere (c19) [Maybe-mana{noDeck}{noPrice}] 
+1x Commune with Dinosaurs (xln) [Plan,Sorcery] 
+1x Congregation at Dawn (rav) [Plan,Instant] 
+1x Cragcrown Pathway // Timbercrown Pathway (znr)
+1x Crested Herdcaller (rix) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Cultivate (c19) [Ramp,Sorcery] 
+1x Deathgorge Scavenger (xln) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Deathmist Raptor (c19) [Maybeboard{noDeck}{noPrice}] 
+1x Decimate (sld) [Maybeboard{noDeck}{noPrice}] 
+1x Dinosaur Stampede (xln) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Dromosaur (usg) [Maybeboard{noDeck}{noPrice}] 
+1x Drover of the Mighty (xln) [Rock/Dork,Creature] 
+1x Elemental Bond (c19) [Draw,Enchantment] 
+1x Elemental Bond (c19) [Maybeboard{noDeck}{noPrice}] 
+1x Etali, Primal Storm (c21) [Plan,Creature] 
+1x Evolving Wilds (c19)
+1x Exotic Orchard (c19) [Maybe-mana{noDeck}{noPrice}] 
+1x Explosive Vegetation (cn2) [Ramp,Sorcery] 
+1x Familiar Ground (wth) [Maybeboard{noDeck}{noPrice}] 
+1x Farseek (c19) [Ramp,Sorcery] 
+1x Fellwar Stone (4ed) [Maybe-mana{noDeck}{noPrice}] 
+1x Fires of Yavimaya (cns) [Plan,Enchantment] 
+1x Forerunner of the Empire (rix) [Plan,Creature] 
+8x Forest (stx)
+1x Fungusaur (fmb1) *F*  [Maybeboard{noDeck}{noPrice}] 
+1x Garruk's Uprising (m21) [Draw,Enchantment,Plan] 
+1x Ghalta, Primal Hunger (rix) [Plan,Creature] 
+1x Gishath, Sun's Avatar (sld) [Commander{top}] 
+1x Glorious Sunrise (vow) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Goring Ceratops (xln) [Plan,Creature] 
+1x Grand Coliseum (ons) [Maybe-mana{noDeck}{noPrice}] 
+1x Graypelt Refuge (c19)
+1x Grazing Whiptail (xln) [Maybeboard{noDeck}{noPrice}] 
+1x Gruul Signet (gpt) [Rock/Dork,Artifact] 
+1x Gruul Turf (c19)
+1x Heroic Intervention (aer) [Plan,Instant] 
+1x Huatli, Warrior Poet (xln) [Plan,Planeswalker] 
+1x Johan (chr) [Maybeboard{noDeck}{noPrice}] 
+1x Jungle Shrine (c19)
+1x Kazandu Refuge (c19) [Maybe-mana{noDeck}{noPrice}] 
+1x Kindred Charge (c17) [Maybeboard{noDeck}{noPrice}] 
+1x Kinjalli's Caller (xln) [Ramp,Creature] 
+1x Kinjalli's Sunwing (xln) [Plan,Creature] 
+1x Knight of the Stampede (rix) [Ramp,Creature] 
+1x Kodama's Reach (c21) [Ramp,Sorcery] 
+1x Magmasaur (tmp) [Maybeboard{noDeck}{noPrice}] 
+1x Majestic Heliopterus (rix) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Marauding Raptor (m20) [Ramp,Creature] 
+1x Migration Path (iko) [Ramp,Sorcery] 
+1x Mirari's Wake (mh2) [Ramp,Enchantment] 
+2x Mountain (stx)
+1x Naya Charm (c19) [Maybeboard{noDeck}{noPrice}] 
+1x Naya Panorama (c19) [Maybe-mana{noDeck}{noPrice}] 
+1x Needletooth Raptor (rix) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Needleverge Pathway // Pillarverge Pathway (znr)
+1x Nissa's Pilgrimage (ori) [Maybeboard{noDeck}{noPrice}] 
+1x Otepec Huntmaster (xln) [Ramp,Creature,Plan] 
+1x Overgrown Farmland (mid) [Maybe-mana{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Overrun (m10) [Maybeboard{noDeck}{noPrice}] 
+1x Overwhelming Stampede (c19) [Plan] 
+1x Path of Ancestry (sld)
+1x Path to Exile (mm3) [Maybeboard{noDeck}{noPrice}] 
+2x Plains (znr)
+1x Polyraptor (rix) [Plan,Creature] 
+1x Pounce (xln) [Maybeboard{noDeck}{noPrice}] 
+1x Primal Surge (avr) [Maybeboard{noDeck}{noPrice}] 
+1x Pygmy Allosaurus (ice) [Maybeboard{noDeck}{noPrice}] 
+1x Pyrohemia (cma) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Quartzwood Crasher (iko) [Plan,Creature] 
+1x Raging Regisaur (jmp) [Plan,Creature] 
+1x Raging Swordtooth (xln) [Plan,Creature] 
+1x Rampaging Brontodon (jmp) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Rampaging Ferocidon (xln) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Rampant Growth (mir) [Ramp,Sorcery] 
+1x Ranging Raptors (xln) [Ramp,Creature] 
+1x Raptor Hatchling (xln) [Maybeboard{noDeck}{noPrice}] 
+1x Realmwalker (khm) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Reflecting Pool (cns)
+1x Regal Behemoth (cn2) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Regisaur Alpha (xln) [Plan,Creature] 
+1x Return of the Wildspeaker (c21) [Draw,Instant] 
+1x Return to Nature (mid) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Rhythm of the Wild (nec) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Ripjaw Raptor (xln) [Draw,Creature] 
+1x Rockfall Vale (mid) [Maybe-mana{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Rogue's Passage (mic)
+1x Rolling Temblor (c19) [Maybeboard{noDeck}{noPrice}] 
+1x Rootbound Crag (m12)
+1x Rugged Highlands (c19) [Maybe-mana{noDeck}{noPrice}] 
+1x Runic Armasaur (m19) [Draw,Creature] 
+1x Rupture Spire (cm2) [Maybe-mana{noDeck}{noPrice}] 
+1x Sacred Foundry (gtc) [Maybe-mana{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Samut, Tyrant Smasher (sld) *F*  [Maybeboard{noDeck}{noPrice}] 
+1x Savage Stomp (xln) [Maybeboard{noDeck}{noPrice}] 
+1x Secluded Courtyard (neo) [Maybe-mana{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Selesnya Guildgate (rtr) [Maybe-mana{noDeck}{noPrice}] 
+1x Selesnya Sanctuary (c19)
+1x Selesnya Signet (rav) [Rock/Dork,Artifact] 
+1x Shake the Foundations (rix) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Shifting Ceratops (m20) [Plan,Creature] 
+1x Shining Aerosaur (xln) [Plan] 
+1x Shivan Raptor (usg) [Maybeboard{noDeck}{noPrice}] 
+1x Silverclad Ferocidons (rix) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Skyshroud Claim (bbd) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Slagwoods Bridge (mh2) [Maybe-mana{noDeck}{noPrice}] 
+1x Smothering Tithe (rna) [Maybeboard{noDeck}{noPrice}] 
+1x Snapping Sailback (xln) [Maybeboard{noDeck}{noPrice}] 
+1x Sol Ring (c19) [Rock/Dork,Artifact] 
+1x Stampeding Horncrest (rix) [Maybeboard{noDeck}{noPrice}] 
+1x Star Compass (ima) [Maybe-mana{noDeck}{noPrice}] 
+1x Star of Extinction (mb1) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Stomping Ground (rna) [Maybe-mana{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Stone Quarry (c19) [Maybe-mana{noDeck}{noPrice}] 
+1x Sun-Crowned Hunters (xln) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Sundown Pass (vow) [Maybe-mana{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Sungrass Prairie (c19) [Maybe-mana{noDeck}{noPrice}] 
+1x Sunpetal Grove (xln) [Maybe-mana{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Swords to Plowshares (4ed) [Pinpoint,Instant] 
+1x Sylvan Library (4ed) [Draw,Enchantment] 
+1x Teferi's Protection (c17) [Maybeboard{noDeck}{noPrice}] 
+1x Temple Altisaur (rix) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Temple Garden (rtr) [Maybe-mana{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Temple of Abandon (ths)
+1x Terramorphic Expanse (c19)
+1x The Great Henge (eld) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x The Immortal Sun (rix) [Maybeboard{noDeck}{noPrice}] 
+1x The Tarrasque (afr) [Pinpoint,Creature] 
+1x Thrash of Raptors (xln) [Maybeboard{noDeck}{noPrice}] 
+1x Thrashing Brontodon (m21) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Thrasta, Tempest's Roar (mh2) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Thunderherd Migration (gn2) [Ramp,Sorcery] 
+1x Thundering Spineback (xln) [Plan,Creature] 
+1x Titanic Ultimatum (ddh) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Titanoth Rex (iko) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Transguild Promenade (rtr) [Maybe-mana{noDeck}{noPrice}] 
+1x Trapjaw Tyrant (rix) [Pinpoint,Creature] 
+1x Unclaimed Territory (c20)
+1x Unnatural Growth (pmid) [Plan,Enchantment] 
+1x Untamed Wilds (por) [Maybeboard{noDeck}{noPrice}] 
+1x Vanquisher's Banner (xln) [Draw,Artifact] 
+1x Verdant Sun's Avatar (c21) [Plan,Creature] 
+1x Wakening Sun's Avatar (xln) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Warstorm Surge (c19) [Pinpoint] 
+1x Wayward Swordtooth (prix) [Plan,Creature] 
+1x Wear // Tear (dgm) [Pinpoint] 
+1x Wind-Scarred Crag (c17)
+1x Worldly Tutor (mir) [Maybeboard{noDeck}{noPrice}] 
+1x Yidaro, Wandering Monster (iko) [Maybeboard{noDeck}{noPrice}]  ^Getting,#2ccce4^
+1x Zacama, Primal Calamity (rix) [Maybeboard{noDeck}{noPrice}]  ^Don't Have,#f47373^
+1x Zendikar Resurgent (ogw) [Draw,Enchantment,Ramp] 
+1x Zetalpa, Primal Dawn (c19) [Plan,Creature] 

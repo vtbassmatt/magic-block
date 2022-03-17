@@ -1,0 +1,24 @@
+# a Modern deck exported from Deckstats
+//Main
+3 Blistercoil Weird
+2 Bloodwater Entity
+4 Gelectrode
+8 [SNC#274] Island
+2 Izzet Charm
+2 Jaya, Venerated Firemage
+2 Jori En, Ruin Diver
+1 Keranos, God of Storms
+4 [STA#42] Lightning Bolt
+2 Mindswipe
+8 [SNC#278] Mountain
+3 Riverfall Mimic
+3 Serum Visions
+2 Shard Volley
+4 Shock
+2 Spellheart Chimera
+2 Sprite Dragon
+2 Swerve
+4 Temple of Epiphany
+
+//Sideboard
+2 Essence Backlash
