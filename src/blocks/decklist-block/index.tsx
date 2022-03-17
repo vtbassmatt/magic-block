@@ -1,6 +1,7 @@
 import { FileBlockProps } from "@githubnext/utils";
 import { useState } from "react";
 import { cardLookup, CardNotFound } from "./cardData";
+import { parseLine } from "./cardParser";
 import "./index.css";
 
 export default function (props: FileBlockProps) {
@@ -24,18 +25,18 @@ export default function (props: FileBlockProps) {
 }
 
 const ListItem = ({ value }: { value: string }) => {
-  const isComment = value.startsWith("#") || value.startsWith("//");
-  if (isComment) {
-    return <Comment value={value} />;
+  let card = parseLine(value);
+  switch (card.kind) {
+    case "card":
+      return <Card cardname={card.cardname} count={card.count} />;
+    case "comment":
+      return <Comment value={card.value} />;
+    case "uncertain":
+      return <Uncertain value={card.line} />;
+    default:
+      const _exhaustion: never = card;
+      return _exhaustion;
   }
-  const hasCount = /(\d+) (.*)/i;
-  const data = value.match(hasCount);
-  if (data) {
-    const count = data[1];
-    const name = data[2];
-    return <Card cardname={name} count={parseInt(count)} />;
-  }
-  return <Uncertain value={value} />;
 };
 
 const Uncertain = ({ value }: { value: string }) => {
