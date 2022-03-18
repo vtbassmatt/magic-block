@@ -40,81 +40,135 @@ function uncertainLine(line: string): UncertainLine {
 
 type ParsedLine = CommentLine | CardLine | UncertainLine;
 
-export function parseLine(value: string): ParsedLine {
-  const isComment =
-    value.trimStart().startsWith("#") || value.trimStart().startsWith("//");
-  if (isComment) return commentLine(value);
-
-  const hasCount = /(?<count>\d+) (?<name>.*)/i;
-  const data = value.match(hasCount);
-  if (data && data.groups) {
-    const count = data.groups.count || "1";
-    const name = data.groups.name || undefined;
-    if (name === undefined) {
-      // bail if we couldn't find a card name
-      return uncertainLine(value);
-    }
-    return cardLine(name, parseInt(count));
-  }
-
-  return uncertainLine(value);
-}
-
 /////// Grammar ///////
 
 /* EBNF for a card line:
  *
- * line = comment | cardspec
- * cardspec = count SP cardname
- *          | count SP '[' setcode '#' collectornum ']' SP cardname
- *          | count 'x' SP cardname SP '(' setcode ')' foil? tags? earcolor?
+ * line = cardspec | comment
+ * cardspec = num SP cardname
+ *          | num SP '[' setcode '#' collectornum ']' SP cardname
+ *          | num 'x' SP cardname '(' setcode ')' (SP foil)? (SP tags)? (SP earcolor)?
  * SP = \s
- * count = [1-9][0-9]*
- * setcode = [A-Z][A-Z0-9]{2,3} | [a-z][a-z0-9]{2,3}
- * collectornum = count
+ * num = [1-9][0-9]*
+ * setcode = [A-Z0-9]{3,4} | [a-z0-9]{3,4}
+ * collectornum = num
  * foil = '*F*'
  * tags = '[' [^]]* ']'
  * earcolor = '^' [^^]* '^'
  * comment = ('#' | '//') .*
+ * cardname = [^([#]+
+ *
+ * at time of writing, 5 silver-border cards and 24 non-playable pieces
+ * have a "(" in their name. i'm OK excluding these for now. no cards
+ * in Scryfall have a "[" or "#".
  */
 
-function parse(text: string): ParsedLine {
+export function parseLine(text: string): ParsedLine {
   const res = line({ text, index: 0 });
   if (res.success) return res.value;
-  console.log(
+
+  console.error(
     `Parse error, expected ${res.expected} at char ${res.ctx.index} ("${text}")`
   );
   return uncertainLine(text);
 }
 
-// line = comment | cardspec
+// line = cardspec | comment
 function line(ctx: Context): Result<CommentLine | CardLine> {
-  return any<CommentLine | CardLine>([comment, cardspec])(ctx);
+  return any<CardLine | CommentLine>([cardspec, comment])(ctx);
 }
 
 // comment = ('#' | '//') .*
-function comment(ctx: Context): Result<CommentLine> {
-  const comment = sequence<string>([
-    any<string>([str("#"), str("//")]),
-    regex(/.*/, "comment"),
-  ])(ctx);
-  if (comment.success) {
-    return success(comment.ctx, commentLine(comment.value[1]));
-  }
-  return comment;
-}
-
-const comment2 = map(
+const comment = map(
   sequence<string>([
     any<string>([str("#"), str("//")]),
-    regex(/.*/, "comment"),
+    regex(/.*/g, "comment"),
   ]),
-  ([_lead, rest]): CommentLine => commentLine(rest)
+  ([lead, rest]): CommentLine => commentLine(lead + rest)
 );
 
 function cardspec(ctx: Context): Result<CardLine> {
-  throw "";
+  return any<CardLine>([cardspec1, cardspec2, cardspec3])(ctx);
 }
+
+// cardname = [^([#]+
+const cardname = regex(/[^\(\[\#]+/g, "card name");
+
+// SP = \s
+const space = regex(/\s/gu, "whitespace");
+
+// num = [1-9][0-9]*
+const num = map(regex(/\d+/g, "number"), parseInt);
+
+// setcode = [A-Z0-9]{3,4} | [a-z0-9]{3,4}
+const setcode = regex(/[A-Z0-9]{3,4}/gi, "set code");
+
+// for now, reuse "num", but I suspect there are other formats
+// to handle in the future
+// collectornum = num
+const collectornum = num;
+
+// foil = '*F*'
+const foil = str("*F*");
+
+// tags = '[' [^]]* ']'
+// (brackets surrounding anything not a bracket)
+const tags = regex(/\/[^]]*\//g, "tag list");
+
+// earcolor = '^' [^^]* '^'
+// (carets surrounding anything not a caret)
+const earcolor = regex(/^[^^]^/g, "ear color list");
+
+// cardspec = num SP cardname
+const cardspec1 = map(
+  sequence<string | number>([num, space, cardname]),
+  ([count, ws, cardname]): CardLine =>
+    cardLine(cardname as string, count as number)
+);
+
+// cardspec = num SP '[' setcode '#' collectornum ']' SP cardname
+const cardspec2 = map(
+  sequence<string | number>([
+    num,
+    space,
+    str("["),
+    setcode,
+    str("#"),
+    collectornum,
+    str("]"),
+    space,
+    cardname,
+  ]),
+  ([
+    count,
+    _ws1,
+    _lbrkt,
+    _setcode,
+    _octothorpe,
+    _collnum,
+    _rbrkt,
+    _ws2,
+    cardname,
+  ]): CardLine => cardLine(cardname as string, count as number)
+);
+
+// cardspec = num 'x' SP cardname '(' setcode ')' (SP foil)? (SP tags)? (SP earcolor)?
+// but for now don't bother parsing past the "(setcode)" part
+const cardspec3 = map(
+  sequence<string | number>([
+    num,
+    str("x"),
+    space,
+    cardname,
+    // cardname eats the space that would be here
+    str("("),
+    setcode,
+    str(")"),
+    regex(/.*/g, "rest of line"),
+  ]),
+  ([count, _x, _ws, cardname, _lparen, _setcode, _rparen, _rest]): CardLine =>
+    cardLine(cardname as string, count as number)
+);
 
 /////// Parser ////////
 // thank you https://www.sigmacomputing.com/blog/writing-a-parser-combinator-from-scratch-in-typescript/
@@ -168,10 +222,12 @@ function regex(re: RegExp, expected: string): Parser<string> {
 
 function sequence<T>(parsers: Parser<T>[]): Parser<T[]> {
   return (ctx) => {
+    //console.log(`sequence<T> for "${ctx.text}"@${ctx.index}`);
     let values: T[] = [];
     let nextCtx = ctx;
     for (const parser of parsers) {
       const res = parser(nextCtx);
+      //console.log(res);
       if (!res.success) return res;
       values.push(res.value);
       nextCtx = res.ctx;
@@ -182,9 +238,11 @@ function sequence<T>(parsers: Parser<T>[]): Parser<T[]> {
 
 function any<T>(parsers: Parser<T>[]): Parser<T> {
   return (ctx) => {
+    //console.log(`any<T> for "${ctx.text}"@${ctx.index}`);
     let furthestRes: Result<T> | null = null;
     for (const parser of parsers) {
       const res = parser(ctx);
+      //console.log(res);
       if (res.success) return res;
       if (!furthestRes || furthestRes.ctx.index < res.ctx.index)
         furthestRes = res;
