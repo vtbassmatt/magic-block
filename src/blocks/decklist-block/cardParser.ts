@@ -38,7 +38,17 @@ function uncertainLine(line: string): UncertainLine {
   };
 }
 
-type ParsedLine = CommentLine | CardLine | UncertainLine;
+interface BlankLine {
+  kind: "blank";
+}
+
+function blankLine(): BlankLine {
+  return {
+    kind: "blank",
+  };
+}
+
+type ParsedLine = CommentLine | CardLine | UncertainLine | BlankLine;
 
 /////// Grammar ///////
 
@@ -64,6 +74,7 @@ type ParsedLine = CommentLine | CardLine | UncertainLine;
  */
 
 export function parseLine(text: string): ParsedLine {
+  if (text.trim() === "") return blankLine();
   const res = line({ text, index: 0 });
   if (res.success) return res.value;
 

@@ -33,6 +33,8 @@ const ListItem = ({ value }: { value: string }) => {
       return <CommentItem value={card.value} />;
     case "uncertain":
       return <UncertainItem value={card.line} />;
+    case "blank":
+      return <CommentItem value=" " />;
     default:
       const _exhaustion: never = card;
       return _exhaustion;
