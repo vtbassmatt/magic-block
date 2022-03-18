@@ -49,7 +49,8 @@ export function parseLine(value: string): ParsedLine {
     const count = data.groups.count || "1";
     const name = data.groups.name || undefined;
     if (name === undefined) {
-      throw "could not parse a cardname";
+      // bail if we couldn't find a card name
+      return new Uncertain(value);
     }
     return new Card(name, parseInt(count));
   }
