@@ -28,7 +28,14 @@ const ListItem = ({ value }: { value: string }) => {
   let card = parseLine(value);
   switch (card.kind) {
     case "card":
-      return <CardItem cardname={card.cardname} count={card.count} />;
+      return (
+        <CardItem
+          cardname={card.cardname}
+          count={card.count}
+          setcode={card.setcode}
+          collectorNumber={card.collectorNumber}
+        />
+      );
     case "comment":
       return <CommentItem value={card.value} />;
     case "uncertain":
@@ -53,15 +60,28 @@ const CommentItem = ({ value }: { value: string }) => {
   );
 };
 
-const CardItem = ({ cardname, count }: { cardname: string; count: number }) => {
+// TODO: account for collectorNumber too
+const CardItem = ({
+  cardname,
+  count,
+  setcode,
+  collectorNumber,
+}: {
+  cardname: string;
+  count: number;
+  setcode?: string;
+  collectorNumber?: number;
+}) => {
   const [typeline, setTypeline] = useState("(loading...)");
   const [scryfallLink, setScryfallLink] = useState(
-    `https://scryfall.com/search?q=!%22${cardname}%22`
+    setcode
+      ? `https://scryfall.com/search?q=!%22${cardname}%22%20`
+      : `https://scryfall.com/search?q=!%22${cardname}%22set%3A${setcode}`
   );
   const [successClassName, setSuccessClassName] = useState("card-pending");
 
   cardLookup
-    .getCard(cardname)
+    .getCard(cardname, setcode)
     .then(function (card) {
       if (card instanceof CardNotFound) {
         setTypeline("[card not found]");
@@ -83,6 +103,8 @@ const CardItem = ({ cardname, count }: { cardname: string; count: number }) => {
         {cardname}
       </a>{" "}
       <span>{typeline}</span>
+      {setcode === undefined ? "" : <span> {setcode}</span>}
+      {collectorNumber === undefined ? "" : <span>#{collectorNumber}</span>}
     </li>
   );
 };

@@ -11,22 +11,24 @@ interface CardMap {
 class CardDB {
   private cards: CardMap = {};
 
-  async getCard(cardname: string): Promise<MaybeCard> {
-    if (cardname in this.cards) {
-      const cachedCardData = this.cards[cardname];
+  async getCard(cardname: string, setcode?: string): Promise<MaybeCard> {
+    const cardKey = cardname + setcode;
+    if (cardKey in this.cards) {
+      const cachedCardData = this.cards[cardKey];
       return Promise.resolve(cachedCardData);
     }
 
     let self = this;
-    return getCardNamed(cardname)
+    const options = setcode ? { set: setcode } : {};
+    return getCardNamed(cardname, options)
       .then(function (card) {
-        self.cards[cardname] = card;
+        self.cards[cardKey] = card;
         return card;
       })
       .catch(function (err) {
         if (err?.originalError?.status == 404) {
           // cache 404s
-          self.cards[cardname] = new CardNotFound();
+          self.cards[cardKey] = new CardNotFound();
           return Promise.resolve(self.cards[cardname]);
         } else {
           // don't cache non-404s, it could be transient

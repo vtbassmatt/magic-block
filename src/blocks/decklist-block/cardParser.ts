@@ -15,14 +15,21 @@ interface CardLine {
   cardname: string;
   count: number;
   setcode?: string;
-  collectorNumber?: string;
+  collectorNumber?: number;
 }
 
-function cardLine(cardname: string, count: number): CardLine {
+function cardLine(
+  cardname: string,
+  count: number,
+  setcode?: string,
+  collectorNumber?: number
+): CardLine {
   return {
     kind: "card",
     cardname: cardname,
     count: count,
+    setcode: setcode,
+    collectorNumber: collectorNumber,
   };
 }
 
@@ -154,13 +161,19 @@ const cardspec2 = map(
     count,
     _ws1,
     _lbrkt,
-    _setcode,
+    setcode,
     _octothorpe,
-    _collnum,
+    collnum,
     _rbrkt,
     _ws2,
     cardname,
-  ]): CardLine => cardLine(cardname as string, count as number)
+  ]): CardLine =>
+    cardLine(
+      cardname as string,
+      count as number,
+      setcode as string,
+      collnum as number
+    )
 );
 
 // cardspec = num 'x' SP cardname '(' setcode ')' (SP foil)? (SP tags)? (SP earcolor)?
