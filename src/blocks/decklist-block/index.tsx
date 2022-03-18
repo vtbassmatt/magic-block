@@ -28,22 +28,22 @@ const ListItem = ({ value }: { value: string }) => {
   let card = parseLine(value);
   switch (card.kind) {
     case "card":
-      return <Card cardname={card.cardname} count={card.count} />;
+      return <CardItem cardname={card.cardname} count={card.count} />;
     case "comment":
-      return <Comment value={card.value} />;
+      return <CommentItem value={card.value} />;
     case "uncertain":
-      return <Uncertain value={card.line} />;
+      return <UncertainItem value={card.line} />;
     default:
       const _exhaustion: never = card;
       return _exhaustion;
   }
 };
 
-const Uncertain = ({ value }: { value: string }) => {
+const UncertainItem = ({ value }: { value: string }) => {
   return <li className="uncertain mb-1">{value || "\u00a0"}</li>;
 };
 
-const Comment = ({ value }: { value: string }) => {
+const CommentItem = ({ value }: { value: string }) => {
   return (
     <li className="comment mb-1">
       <pre>{value}</pre>
@@ -51,7 +51,7 @@ const Comment = ({ value }: { value: string }) => {
   );
 };
 
-const Card = ({ cardname, count }: { cardname: string; count: number }) => {
+const CardItem = ({ cardname, count }: { cardname: string; count: number }) => {
   const [typeline, setTypeline] = useState("(loading...)");
   const [scryfallLink, setScryfallLink] = useState(
     `https://scryfall.com/search?q=!%22${cardname}%22`
