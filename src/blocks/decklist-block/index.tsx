@@ -84,7 +84,7 @@ const CardItem = ({
     : `https://scryfall.com/search?q=!%22${cardname}%22%20`;
   const { data, status } = useQuery(
     ["card", cardname],
-    () => getCardNamed(cardname),
+    () => getCardNamed(cardname, { set: setcode }),
     {
       refetchOnWindowFocus: false,
       retry: (failureCount, error: any) =>
