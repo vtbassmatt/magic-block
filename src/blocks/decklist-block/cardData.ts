@@ -29,7 +29,7 @@ class CardDB {
         if (err?.originalError?.status == 404) {
           // cache 404s
           self.cards[cardKey] = new CardNotFound();
-          return Promise.resolve(self.cards[cardname]);
+          return Promise.resolve(self.cards[cardKey]);
         } else {
           // don't cache non-404s, it could be transient
           return Promise.resolve(new CardNotFound());
