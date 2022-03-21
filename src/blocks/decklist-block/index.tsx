@@ -1,6 +1,6 @@
 import { FileBlockProps } from "@githubnext/utils";
-import { useState } from "react";
-import { cardLookup, CardNotFound } from "./cardData";
+import { useQuery } from "react-query";
+import { getCardNamed } from "scryfall-client/dist/api-routes/cards";
 import { parseLine } from "./cardParser";
 import "./index.css";
 
@@ -60,6 +60,13 @@ const CommentItem = ({ value }: { value: string }) => {
   );
 };
 
+const linkClassMap = {
+  success: "card-success",
+  error: "card-failure",
+  loading: "card-pending",
+  idle: "card-pending",
+};
+
 // TODO: account for collectorNumber too
 const CardItem = ({
   cardname,
@@ -72,37 +79,44 @@ const CardItem = ({
   setcode?: string;
   collectorNumber?: number;
 }) => {
-  const [typeline, setTypeline] = useState("(loading...)");
-  const [scryfallLink, setScryfallLink] = useState(
-    setcode
-      ? `https://scryfall.com/search?q=!%22${cardname}%22%20`
-      : `https://scryfall.com/search?q=!%22${cardname}%22set%3A${setcode}`
+  let baseScryfallLink = setcode
+    ? `https://scryfall.com/search?q=!%22${cardname}%22%20set%3A${setcode}`
+    : `https://scryfall.com/search?q=!%22${cardname}%22%20`;
+  const { data, status } = useQuery(
+    ["card", cardname],
+    () => getCardNamed(cardname),
+    {
+      refetchOnWindowFocus: false,
+      retry: (failureCount, error: any) =>
+        failureCount <= 2 && error?.originalError?.response?.statusCode != 404,
+    }
   );
-  const [successClassName, setSuccessClassName] = useState("card-pending");
-
-  cardLookup
-    .getCard(cardname, setcode)
-    .then(function (card) {
-      if (card instanceof CardNotFound) {
-        setTypeline("[card not found]");
-        setSuccessClassName("card-failure");
-      } else {
-        setTypeline("[" + card.card_faces[0].type_line + "]");
-        setScryfallLink(card.scryfall_uri);
-        setSuccessClassName("card-success");
-      }
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
 
   return (
     <li className="mb-1">
       <span className="cardcount">{count > 1 ? count + "x " : ""}</span>
-      <a href={scryfallLink} target="_blank" className={successClassName}>
-        {cardname}
-      </a>{" "}
-      <span>{typeline}</span>
+      {/* @ts-ignore */}
+      {status !== "success" && (
+        <a
+          href={baseScryfallLink}
+          target="_blank"
+          className={linkClassMap[status]}
+        >
+          {cardname}
+        </a>
+      )}
+      {status === "success" && (
+        <a
+          href={data.scryfall_uri}
+          target="_blank"
+          className={linkClassMap[status]}
+        >
+          {cardname}
+        </a>
+      )}{" "}
+      {status === "loading" && <span>(loading...)</span>}
+      {status === "success" && <span>{data.card_faces[0].type_line}</span>}
+      {status === "error" && <span>[card not found]</span>}
       {setcode === undefined ? "" : <span> {setcode}</span>}
       {collectorNumber === undefined ? "" : <span>#{collectorNumber}</span>}
     </li>
