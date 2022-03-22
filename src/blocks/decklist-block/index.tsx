@@ -1,4 +1,5 @@
 import { FileBlockProps } from "@githubnext/utils";
+import { FormControl, Select } from "@primer/react";
 import { useQuery } from "react-query";
 import { getCardNamed } from "scryfall-client/dist/api-routes/cards";
 import { parseLine } from "./cardParser";
@@ -14,6 +15,13 @@ export default function (props: FileBlockProps) {
         <h3 className="Box-title">Decklist: {context.path}</h3>
       </div>
       <div className="Box-body">
+        <FormControl>
+          <FormControl.Label>View as</FormControl.Label>
+          <Select>
+            <Select.Option value="text">Text</Select.Option>
+            <Select.Option value="images">Images</Select.Option>
+          </Select>
+        </FormControl>
         <ul className="color-bg-default">
           {Object.values(listEntries).map((line, index) => {
             return <ListItem key={index} value={line} />;
