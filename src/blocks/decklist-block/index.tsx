@@ -1,13 +1,19 @@
 import { FileBlockProps } from "@githubnext/utils";
-import { FormControl, Select } from "@primer/react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { getCardNamed } from "scryfall-client/dist/api-routes/cards";
 import { parseLine } from "./cardParser";
 import "./index.css";
 
+const displayTypes = {
+  text: "text",
+  images: "images",
+};
+
 export default function (props: FileBlockProps) {
   const { context, content, metadata, onUpdateMetadata } = props;
   const listEntries = content.split("\n");
+  const [displayType, setDisplayType] = useState(displayTypes.text);
 
   return (
     <div className="Box m-4">
@@ -15,13 +21,17 @@ export default function (props: FileBlockProps) {
         <h3 className="Box-title">Decklist: {context.path}</h3>
       </div>
       <div className="Box-body">
-        <FormControl>
-          <FormControl.Label>View as</FormControl.Label>
-          <Select>
-            <Select.Option value="text">Text</Select.Option>
-            <Select.Option value="images">Images</Select.Option>
-          </Select>
-        </FormControl>
+        <form>
+          <p>View as</p>
+          <select
+            className="form-select"
+            value={displayType}
+            onChange={(e) => setDisplayType(e.target.value)}
+          >
+            <option value="text">Text</option>
+            <option value="images">Images</option>
+          </select>
+        </form>
         <ul className="color-bg-default">
           {Object.values(listEntries).map((line, index) => {
             return <ListItem key={index} value={line} />;
