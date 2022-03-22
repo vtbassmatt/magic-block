@@ -34,15 +34,40 @@ export default function (props: FileBlockProps) {
             <option value="images">Images</option>
           </select>
         </form>
-        <ul className="color-bg-default">
-          {Object.values(cardLines).map((parsedLine, index) => {
-            return <ListItem key={index} value={parsedLine} />;
-          })}
-        </ul>
+        {displayType === displayTypes.text && (
+          <ul className="color-bg-default">
+            {Object.values(cardLines).map((parsedLine, index) => {
+              return <ListItem key={index} value={parsedLine} />;
+            })}
+          </ul>
+        )}
+        {displayType === displayTypes.images && (
+          <div className="container-lg clearfix">
+            {Object.values(cardLines).map((parsedLine, index) => {
+              return <CardImage key={index} value={parsedLine} />;
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
 }
+
+const CardImage = ({ value }: { value: ParsedLine }) => {
+  switch (value.kind) {
+    case "card":
+      return (
+        <div className="col-4 float-left border p-4">{value.cardname}</div>
+      );
+    case "comment":
+    case "uncertain":
+    case "blank":
+      return <div></div>;
+    default:
+      const _exhaustion: never = value;
+      return _exhaustion;
+  }
+};
 
 const ListItem = ({ value }: { value: ParsedLine }) => {
   switch (value.kind) {
