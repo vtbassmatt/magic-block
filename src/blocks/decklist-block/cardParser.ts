@@ -55,7 +55,7 @@ function blankLine(): BlankLine {
   };
 }
 
-type ParsedLine = CommentLine | CardLine | UncertainLine | BlankLine;
+export type ParsedLine = CommentLine | CardLine | UncertainLine | BlankLine;
 
 /////// Grammar ///////
 

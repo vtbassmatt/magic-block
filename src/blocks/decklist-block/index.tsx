@@ -2,7 +2,7 @@ import { FileBlockProps } from "@githubnext/utils";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { getCardNamed } from "scryfall-client/dist/api-routes/cards";
-import { parseLine } from "./cardParser";
+import { parseLine, ParsedLine } from "./cardParser";
 import "./index.css";
 
 const displayTypes = {
@@ -12,8 +12,10 @@ const displayTypes = {
 
 export default function (props: FileBlockProps) {
   const { context, content, metadata, onUpdateMetadata } = props;
-  const listEntries = content.split("\n");
   const [displayType, setDisplayType] = useState(displayTypes.text);
+
+  const listEntries = content.split("\n");
+  const cardLines = Object.values(listEntries).map((line) => parseLine(line));
 
   return (
     <div className="Box m-4">
@@ -33,8 +35,8 @@ export default function (props: FileBlockProps) {
           </select>
         </form>
         <ul className="color-bg-default">
-          {Object.values(listEntries).map((line, index) => {
-            return <ListItem key={index} value={line} />;
+          {Object.values(cardLines).map((parsedLine, index) => {
+            return <ListItem key={index} value={parsedLine} />;
           })}
         </ul>
       </div>
@@ -42,26 +44,25 @@ export default function (props: FileBlockProps) {
   );
 }
 
-const ListItem = ({ value }: { value: string }) => {
-  let card = parseLine(value);
-  switch (card.kind) {
+const ListItem = ({ value }: { value: ParsedLine }) => {
+  switch (value.kind) {
     case "card":
       return (
         <CardItem
-          cardname={card.cardname}
-          count={card.count}
-          setcode={card.setcode}
-          collectorNumber={card.collectorNumber}
+          cardname={value.cardname}
+          count={value.count}
+          setcode={value.setcode}
+          collectorNumber={value.collectorNumber}
         />
       );
     case "comment":
-      return <CommentItem value={card.value} />;
+      return <CommentItem value={value.value} />;
     case "uncertain":
-      return <UncertainItem value={card.line} />;
+      return <UncertainItem value={value.line} />;
     case "blank":
       return <CommentItem value=" " />;
     default:
-      const _exhaustion: never = card;
+      const _exhaustion: never = value;
       return _exhaustion;
   }
 };
