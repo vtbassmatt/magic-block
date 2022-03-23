@@ -85,9 +85,15 @@ export default function (props: FileBlockProps) {
 const CardImage = ({ value }: { value: DisplayEntry }) => {
   switch (value.parsedLine.kind) {
     case "card":
+      const { data, status } = value.card;
       return (
         <div className="col-4 float-left border p-4">
-          {value.parsedLine.cardname}
+          <img src={data.image_uris.small} />
+          <p>
+            {data.card_faces[0].name}
+            <br />
+            {data.card_faces[0].type_line}
+          </p>
         </div>
       );
     case "comment":
