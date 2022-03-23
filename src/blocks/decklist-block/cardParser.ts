@@ -10,7 +10,7 @@ function commentLine(value: string): CommentLine {
   };
 }
 
-interface CardLine {
+export interface CardLine {
   kind: "card";
   cardname: string;
   count: number;
