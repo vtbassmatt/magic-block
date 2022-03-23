@@ -10,7 +10,7 @@ function commentLine(value: string): CommentLine {
   };
 }
 
-interface CardLine {
+export interface CardLine {
   kind: "card";
   cardname: string;
   count: number;
@@ -55,7 +55,7 @@ function blankLine(): BlankLine {
   };
 }
 
-type ParsedLine = CommentLine | CardLine | UncertainLine | BlankLine;
+export type ParsedLine = CommentLine | CardLine | UncertainLine | BlankLine;
 
 /////// Grammar ///////
 

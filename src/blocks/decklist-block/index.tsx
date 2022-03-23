@@ -1,12 +1,50 @@
 import { FileBlockProps } from "@githubnext/utils";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { getCardNamed } from "scryfall-client/dist/api-routes/cards";
-import { parseLine } from "./cardParser";
+import { parseLine, ParsedLine, CardLine } from "./cardParser";
 import "./index.css";
+
+const displayTypes = {
+  text: "text",
+  images: "images",
+};
+
+interface DisplayEntry {
+  parsedLine: ParsedLine;
+  card?: any;
+}
+
+function makeDisplayEntry(parsedLine: ParsedLine): DisplayEntry {
+  return {
+    parsedLine: parsedLine,
+    // TODO: account for collectorNumber too
+    card:
+      parsedLine.kind == "card"
+        ? useQuery(
+            ["card", parsedLine.cardname],
+            () =>
+              getCardNamed(parsedLine.cardname, { set: parsedLine.setcode }),
+            {
+              refetchOnWindowFocus: false,
+              retry: (failureCount, error: any) =>
+                failureCount <= 2 &&
+                error?.originalError?.response?.statusCode != 404,
+            }
+          )
+        : undefined,
+  };
+}
 
 export default function (props: FileBlockProps) {
   const { context, content, metadata, onUpdateMetadata } = props;
+  const [displayType, setDisplayType] = useState(displayTypes.text);
+
   const listEntries = content.split("\n");
+  const cardLines = Object.values(listEntries).map((line) => parseLine(line));
+  const cardDisplays = Object.values(cardLines).map((parsedLine) =>
+    makeDisplayEntry(parsedLine)
+  );
 
   return (
     <div className="Box m-4">
@@ -14,36 +52,87 @@ export default function (props: FileBlockProps) {
         <h3 className="Box-title">Decklist: {context.path}</h3>
       </div>
       <div className="Box-body">
-        <ul className="color-bg-default">
-          {Object.values(listEntries).map((line, index) => {
-            return <ListItem key={index} value={line} />;
-          })}
-        </ul>
+        <form>
+          <p>View as</p>
+          <select
+            className="form-select"
+            value={displayType}
+            onChange={(e) => setDisplayType(e.target.value)}
+          >
+            <option value="text">Text</option>
+            <option value="images">Images</option>
+          </select>
+        </form>
+        {displayType === displayTypes.text && (
+          <ul className="color-bg-default">
+            {Object.values(cardDisplays).map((value, index) => {
+              return <ListItem key={index} value={value} />;
+            })}
+          </ul>
+        )}
+        {displayType === displayTypes.images && (
+          <div className="container-lg clearfix">
+            {Object.values(cardDisplays).map((value, index) => {
+              return <CardImage key={index} value={value} />;
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-const ListItem = ({ value }: { value: string }) => {
-  let card = parseLine(value);
-  switch (card.kind) {
+const CardImage = ({ value }: { value: DisplayEntry }) => {
+  switch (value.parsedLine.kind) {
     case "card":
+      const { data, status } = value.card;
       return (
-        <CardItem
-          cardname={card.cardname}
-          count={card.count}
-          setcode={card.setcode}
-          collectorNumber={card.collectorNumber}
-        />
+        <div className="col-4 float-left p-3">
+          {status === "success" && (
+            <div>
+              <img src={data.card_faces[0].image_uris.small} />
+              <p>
+                <span className="cardcount">
+                  {value.parsedLine.count > 1
+                    ? value.parsedLine.count + "x "
+                    : ""}
+                </span>
+                {data.card_faces[0].name}
+                <br />
+                {data.card_faces[0].type_line}
+              </p>
+            </div>
+          )}
+          {status === "loading" && (
+            <div>{value.parsedLine.cardname} – loading...</div>
+          )}
+          {status === "error" && (
+            <div>{value.parsedLine.cardname} – [card not found]</div>
+          )}
+        </div>
       );
     case "comment":
-      return <CommentItem value={card.value} />;
     case "uncertain":
-      return <UncertainItem value={card.line} />;
+    case "blank":
+      return <div></div>;
+    default:
+      const _exhaustion: never = value.parsedLine;
+      return _exhaustion;
+  }
+};
+
+const ListItem = ({ value }: { value: DisplayEntry }) => {
+  switch (value.parsedLine.kind) {
+    case "card":
+      return <CardItem cardline={value.parsedLine} card={value.card} />;
+    case "comment":
+      return <CommentItem value={value.parsedLine.value} />;
+    case "uncertain":
+      return <UncertainItem value={value.parsedLine.line} />;
     case "blank":
       return <CommentItem value=" " />;
     default:
-      const _exhaustion: never = card;
+      const _exhaustion: never = value.parsedLine;
       return _exhaustion;
   }
 };
@@ -67,30 +156,12 @@ const linkClassMap = {
   idle: "card-pending",
 };
 
-// TODO: account for collectorNumber too
-const CardItem = ({
-  cardname,
-  count,
-  setcode,
-  collectorNumber,
-}: {
-  cardname: string;
-  count: number;
-  setcode?: string;
-  collectorNumber?: number;
-}) => {
+const CardItem = ({ cardline, card }: { cardline: CardLine; card: any }) => {
+  const { cardname, setcode, count, collectorNumber } = cardline;
   let baseScryfallLink = setcode
     ? `https://scryfall.com/search?q=!%22${cardname}%22%20set%3A${setcode}`
     : `https://scryfall.com/search?q=!%22${cardname}%22%20`;
-  const { data, status } = useQuery(
-    ["card", cardname],
-    () => getCardNamed(cardname, { set: setcode }),
-    {
-      refetchOnWindowFocus: false,
-      retry: (failureCount, error: any) =>
-        failureCount <= 2 && error?.originalError?.response?.statusCode != 404,
-    }
-  );
+  const { data, status } = card;
 
   return (
     <li className="mb-1">
@@ -100,6 +171,7 @@ const CardItem = ({
         <a
           href={baseScryfallLink}
           target="_blank"
+          /* @ts-ignore */
           className={linkClassMap[status]}
         >
           {cardname}
@@ -109,6 +181,7 @@ const CardItem = ({
         <a
           href={data.scryfall_uri}
           target="_blank"
+          /* @ts-ignore */
           className={linkClassMap[status]}
         >
           {cardname}
