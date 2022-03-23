@@ -1,6 +1,6 @@
 import { FileBlockProps } from "@githubnext/utils";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { getCardNamed } from "scryfall-client/dist/api-routes/cards";
 import { parseLine, ParsedLine, CardLine } from "./cardParser";
 import "./index.css";
@@ -36,7 +36,7 @@ function makeDisplayEntry(parsedLine: ParsedLine): DisplayEntry {
   };
 }
 
-export default function (props: FileBlockProps) {
+function Block(props: FileBlockProps) {
   const { context, content, metadata, onUpdateMetadata } = props;
   const [displayType, setDisplayType] = useState(displayTypes.text);
 
@@ -195,3 +195,13 @@ const CardItem = ({ cardline, card }: { cardline: CardLine; card: any }) => {
     </li>
   );
 };
+
+export default function (props: any) {
+  const queryClient = new QueryClient();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Block {...props} />
+    </QueryClientProvider>
+  );
+}
