@@ -87,13 +87,28 @@ const CardImage = ({ value }: { value: DisplayEntry }) => {
     case "card":
       const { data, status } = value.card;
       return (
-        <div className="col-4 float-left border p-4">
-          <img src={data.image_uris.small} />
-          <p>
-            {data.card_faces[0].name}
-            <br />
-            {data.card_faces[0].type_line}
-          </p>
+        <div className="col-4 float-left p-3">
+          {status === "success" && (
+            <div>
+              <img src={data.card_faces[0].image_uris.small} />
+              <p>
+                <span className="cardcount">
+                  {value.parsedLine.count > 1
+                    ? value.parsedLine.count + "x "
+                    : ""}
+                </span>
+                {data.card_faces[0].name}
+                <br />
+                {data.card_faces[0].type_line}
+              </p>
+            </div>
+          )}
+          {status === "loading" && (
+            <div>{value.parsedLine.cardname} – loading...</div>
+          )}
+          {status === "error" && (
+            <div>{value.parsedLine.cardname} – [card not found]</div>
+          )}
         </div>
       );
     case "comment":
